@@ -1,20 +1,21 @@
 SpreeBetterBreadcrumb
 =====================
 
-Introduction goes here.
+Just an update to the spree breadcrumbs to provide more intuitive usage of breadcrumbs.  The products path and taxons path are seperate, and the breadcrumbs wil also display the product name at the end.
 
+An additional helper method has been added to provide a path to the last visted breadcrumb (either a taxon or the products path), to allow linking back to the last specific area the user was in.  This is useful when a user adds something to their cart, they can be linked back to the last taxon they were browsing.
 
 Example
 =======
 
-Example goes here.
+Breadcrumbs now take an addition parameter, a product as parameter two:
 
-Testing
--------
+<%=breadcrumbs(@taxon, @product, optional_seperator_string)%>
 
-Be sure to add the rspec-rails gem to your Gemfile and then create a dummy test app for the specs to run against.
+For backwards compatibility the optional seperator string can also be passed as the second parameter, but doing so limits some of the functionality of the breadcrumbs.
 
-    $ bundle exec rake test app
-    $ bundle exec rspec spec
+To get the path to the last breadcrumb use:
 
-Copyright (c) 2012 [name of extension creator], released under the New BSD License
+<%=last_crumb_path%>
+
+

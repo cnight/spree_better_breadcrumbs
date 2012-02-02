@@ -25,17 +25,16 @@ module Spree::BaseHelper
 		else
 			crumbs << content_tag(:li, content_tag(:span, t('products')))
 		end
-		crumb_list = content_tag(:ul, raw(crumbs.flatten.map{|li| li.mb_chars}.join))
-		content_tag(:div, crumb_list + tag(:br, {:class => 'clear'}, false, true), :id => 'breadcrumbs')
+		crumb_list = content_tag(:ul, raw(crumbs.flatten.map{|li| li.mb_chars}.join), :class => 'inline')
+		content_tag(:div, crumb_list, :id => 'breadcrumbs')
 	end
 	
 	def last_crumb_path
 		plink = session['last_crumb']
-		if plink && taxon = Taxon.find_by_permalink(plink)
+		if plink && taxon = Spree::Taxon.find_by_permalink(plink)
 			seo_url(taxon)
 		else
 			products_path
 		end
 	end
 end
-

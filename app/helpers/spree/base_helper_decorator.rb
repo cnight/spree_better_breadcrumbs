@@ -4,11 +4,11 @@ module Spree::BaseHelper
 			sep = product
 			product = nil
 		end
-		
+
 		return "" unless taxon || product || current_page?(products_path)
 
 		session['last_crumb'] = taxon ? taxon.permalink : nil
-		sep = raw(sep)
+		sep = content_tag(:span, raw(sep), :id => 'separator')
 		crumbs = [content_tag(:li, link_to(t(:home) , root_path) + sep)]
 
 		if taxon
@@ -28,7 +28,7 @@ module Spree::BaseHelper
 		crumb_list = content_tag(:ul, raw(crumbs.flatten.map{|li| li.mb_chars}.join), :class => 'inline')
 		content_tag(:div, crumb_list, :id => 'breadcrumbs')
 	end
-	
+
 	def last_crumb_path
 		plink = session['last_crumb']
 		if plink && taxon = Spree::Taxon.find_by_permalink(plink)
